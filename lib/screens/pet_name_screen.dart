@@ -1,283 +1,208 @@
-// lib/screens/pet_name_screen.dart
+// lib/screens/first_page.dart
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'dart:math';
+import '../widgets/custom_fab.dart';
+import 'home_screen.dart';
+import 'anger_page.dart';
 
-class PetNameScreen extends StatefulWidget {
-  const PetNameScreen({Key? key}) : super(key: key);
-
-  @override
-  State<PetNameScreen> createState() => _PetNameScreenState();
-}
-
-class _PetNameScreenState extends State<PetNameScreen> {
-  String? selectedPetName;
-  bool isDropdownOpen = false;
+class FirstPage extends StatelessWidget {
+  final dynamic toggleTheme;
   
-  final List<String> petNames = [
-    'Discount Romeo',
-    'Emotional Goldfish',
-    'Walking Red Flag',
-    'Clown in Disguise',
-    'Expired Snack',
-    'Human Typo',
-    'Bargain Bin Prince',
-    'Recycled Disappointment',
-    'Clearance Casanova',
-    'Knock-off Knight',
-    'Budget Boyfriend',
-    'Temporary Trash',
-    'Plastic Prince',
-    'Wannabe King',
-    'Fake Fortune',
-    'Discount Drama',
-    'Clearance Clown',
-    'Bargain Basement Boy',
-    'Expired Energy',
-    'Waste of WiFi',
-  ];
+  final dynamic isDarkMode;
 
-  void _selectRandomPetName() {
-    final random = Random();
-    setState(() {
-      selectedPetName = petNames[random.nextInt(petNames.length)];
-    });
-  }
-
-  void _copyToClipboard(String text) {
-    Clipboard.setData(ClipboardData(text: text));
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Copied "$text" to clipboard!'),
-        backgroundColor: const Color(0xFFE85A4F),
-        duration: const Duration(seconds: 2),
-      ),
-    );
-  }
+  const FirstPage({Key? key,required this.toggleTheme, required this.isDarkMode}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFF8F0),
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF8B1538),
-        foregroundColor: Colors.white,
+        backgroundColor: const Color(0xFF590201), // Dark red
         title: const Text('Pet Name Generator'),
-        centerTitle: true,
         elevation: 0,
+        // Make title white (already default with dark background)
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 40),
-            // Main Title
-            const Text(
-              'Give that excuse of a human a pet-name',
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-                height: 1.3,
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // Title - on white background, but dark text is fine
+              Text(
+                'Give that excuse of a human a pet-name',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF590201), // Dark red text
+                ),
               ),
-            ),
-            const SizedBox(height: 40),
-            
-            // Dropdown Section
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.grey.shade300,
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.shade400,
-                    blurRadius: 4,
-                    offset: const Offset(0, 2),
+
+              const SizedBox(height: 20),
+
+              // Cat Image
+              Image.asset(
+                '/home/nakato/tears/assets/Cat_unpleasant.png',
+                width: 180,
+                height: 180,
+              ),
+
+              const SizedBox(height: 30),
+
+              // Dropdown Button - wrapped in SizedBox to control width
+              SizedBox(
+                width: 240, // Narrow dropdown
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFF8D56C), // Soft yellow
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: DropdownButton<String>(
+                    isExpanded: true,
+                    value: null,
+                    items: const [
+                      DropdownMenuItem(
+                        value: 'Discount Romeo',
+                        child: Text('Discount Romeo'),
+                      ),
+                      DropdownMenuItem(
+                        value: 'Emotional Goldfish',
+                        child: Text('Emotional Goldfish'),
+                      ),
+                      DropdownMenuItem(
+                        value: 'Walking Red Flag',
+                        child: Text('Walking Red Flag'),
+                      ),
+                    ],
+                    onChanged: (value) {
+                      // Handle selection if needed
+                    },
+                    hint: const Text(
+                      'Select a petname...',
+                      style: TextStyle(color: Colors.black, fontSize: 14),
+                    ),
+                    icon: const Icon(Icons.arrow_drop_down, size: 20),
+                    iconSize: 20,
+                    elevation: 16,
+                    style: const TextStyle(color: Colors.black, fontSize: 14),
+                    underline: Container(),
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 25),
+
+              // Suggestions Title - now white if background changes, but currently on white
+              // Let's wrap suggestions in a dark-colored container to show white text
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(9),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF590201), // Dark red background
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Text(
+                  'Here are a few suggestions for you:',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white, // ✅ White text on dark
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 9),
+
+              // Suggestions List - also on dark theme
+              _buildSuggestion('> Discount Romeo'),
+              _buildSuggestion('> Emotional Goldfish'),
+              _buildSuggestion('> Walking Red Flag'),
+
+              const SizedBox(height: 30),
+
+              // Buttons: Skip & Continue - compact width
+              Row(
+                mainAxisSize: MainAxisSize.min, // Shrink row to content
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Skip Button - Dark red (app bar color)
+                  SizedBox(
+                    width: 80,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/home');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF590201), // Same as app bar
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        textStyle: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      child: const Text('SKIP'),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  // Continue Button - Yellow
+                  SizedBox(
+                    width: 100,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/anger');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFFFEC106),
+                        foregroundColor: Colors.black,
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        textStyle: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      child: const Text('CONTINUE'),
+                    ),
                   ),
                 ],
               ),
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  onTap: () {
-                    setState(() {
-                      isDropdownOpen = !isDropdownOpen;
-                    });
-                  },
-                  borderRadius: BorderRadius.circular(12),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          selectedPetName ?? 'Select for a pet-name.....',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: selectedPetName != null ? Colors.black87 : Colors.grey.shade600,
-                            fontWeight: selectedPetName != null ? FontWeight.w600 : FontWeight.normal,
-                          ),
-                        ),
-                        Icon(
-                          isDropdownOpen ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
-                          color: Colors.grey.shade700,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            
-            const SizedBox(height: 32),
-            
-            // Suggestions Section
-            const Text(
-              'Here are a few suggestions for you;',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                color: Colors.black87,
-              ),
-            ),
-            const SizedBox(height: 16),
-            
-            // Pet Name Suggestions
-            Expanded(
-              child: ListView.builder(
-                itemCount: petNames.take(6).length,
-                itemBuilder: (context, index) {
-                  final petName = petNames[index];
-                  return Container(
-                    margin: const EdgeInsets.only(bottom: 8),
-                    child: Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            selectedPetName = petName;
-                          });
-                        },
-                        borderRadius: BorderRadius.circular(8),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-                          child: Row(
-                            children: [
-                              Container(
-                                width: 6,
-                                height: 6,
-                                decoration: BoxDecoration(
-                                  color: selectedPetName == petName 
-                                      ? const Color(0xFFE85A4F) 
-                                      : Colors.grey.shade600,
-                                  shape: BoxShape.circle,
-                                ),
-                              ),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: Text(
-                                  petName,
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: selectedPetName == petName 
-                                        ? const Color(0xFFE85A4F) 
-                                        : Colors.black87,
-                                    fontWeight: selectedPetName == petName 
-                                        ? FontWeight.w600 
-                                        : FontWeight.normal,
-                                  ),
-                                ),
-                              ),
-                              if (selectedPetName == petName)
-                                IconButton(
-                                  onPressed: () => _copyToClipboard(petName),
-                                  icon: const Icon(
-                                    Icons.copy,
-                                    size: 20,
-                                    color: Color(0xFFE85A4F),
-                                  ),
-                                ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-            
-            const SizedBox(height: 20),
-            
-            // Random Generator Button
-            Container(
-              width: double.infinity,
-              margin: const EdgeInsets.only(bottom: 16),
-              child: ElevatedButton(
-                onPressed: _selectRandomPetName,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFFB347),
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  elevation: 4,
-                ),
-                child: const Text(
-                  'Generate Random Pet Name',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-            ),
-            
-            // Copy Button (shown when pet name is selected)
-            if (selectedPetName != null)
-              Container(
-                width: double.infinity,
-                margin: const EdgeInsets.only(bottom: 20),
-                child: ElevatedButton(
-                  onPressed: () => _copyToClipboard(selectedPetName!),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFE85A4F),
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    elevation: 4,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.copy, size: 20),
-                      const SizedBox(width: 8),
-                      Text(
-                        'Copy "${selectedPetName!}"',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-          ],
+            ],
+          ),
         ),
       ),
-      
-      // Floating Action Button
-      floatingActionButton: FloatingActionButton(
-        onPressed: _selectRandomPetName,
-        backgroundColor: const Color(0xFF8B1538),
-        foregroundColor: Colors.white,
-        child: const Icon(Icons.add, size: 28),
+
+      // ✅ FAB on the LEFT side
+      floatingActionButton: CustomFloatingActionButton(
+        onPressed: () {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Feature coming soon!")),
+          );
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+    );
+  }
+
+  // Reusable suggestion item with dark background and white text
+  Widget _buildSuggestion(String text) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 4),
+      child: Text(
+        text,
+        style: const TextStyle(
+          color: Color(0xFF590201),
+          fontSize: 14,
+        ),
       ),
     );
   }

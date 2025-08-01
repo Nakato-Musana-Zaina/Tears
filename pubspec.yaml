@@ -31,6 +31,9 @@ dependencies:
   flutter:
     sdk: flutter
   volume_key_board: ^0.0.1
+  shared_preferences: ^2.2.2
+  confetti: ^0.7.0
+  flutter_slidable: ^3.0.0
   # volume_watcher: ^0.0.4
   # fluttertoast: ^8.0.9
 
@@ -63,6 +66,7 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -10,7 +10,11 @@ import '../services/message_service.dart';
 import 'dart:async'; // for StreamSubscription
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  final dynamic isDarkMode;
+  
+  final dynamic toggleTheme;
+
+  const HomeScreen({Key? key, required this.toggleTheme, required this.isDarkMode}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -28,23 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   late final VolumeKeyBoard _volumeKeyBoard; // For volume buttons
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _loadData();
-
-  //   // Initialize volume button listener
-  //   _volumeKeyBoard = VolumeKeyBoard(); // Instantiate the object
-
-  //   _volumeKeyBoard._volumeKeyBoard.VolumeKeyBoard(
-  //     onVolumeUp: () {
-  //       _handleVolumeButtonPress();
-  //     },
-  //     onVolumeDown: () {
-  //       _handleVolumeButtonPress();
-  //     },
-  //   );
-  // }
+ 
 
 
   Future<void> _loadData() async {
