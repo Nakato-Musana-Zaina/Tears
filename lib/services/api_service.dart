@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import '../models/thought.dart';
 
 class ApiService {
-  static const String baseUrl = 'http://YOUR_BACKEND_URL'; // replace with your backend URL
+  static const String baseUrl = 'postgresql://hbhuser:hbhpassword@localhost:5432/hbhdb'; // replace with your backend URL
 
   // Log a thought
   static Future<Thought?> logThought(Thought thought) async {

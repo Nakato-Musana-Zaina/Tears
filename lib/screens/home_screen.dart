@@ -28,23 +28,23 @@ class _HomeScreenState extends State<HomeScreen> {
 
   late final VolumeKeyBoard _volumeKeyBoard; // For volume buttons
 
-  @override
-  void initState() {
-    super.initState();
-    _loadData();
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _loadData();
 
-    // Initialize volume button listener
-    _volumeKeyBoard = VolumeKeyBoard(); // Instantiate the object
+  //   // Initialize volume button listener
+  //   _volumeKeyBoard = VolumeKeyBoard(); // Instantiate the object
 
-    _volumeKeyBoard._volumeKeyBoard.VolumeKeyBoard(
-      onVolumeUp: () {
-        _handleVolumeButtonPress();
-      },
-      onVolumeDown: () {
-        _handleVolumeButtonPress();
-      },
-    );
-  }
+  //   _volumeKeyBoard._volumeKeyBoard.VolumeKeyBoard(
+  //     onVolumeUp: () {
+  //       _handleVolumeButtonPress();
+  //     },
+  //     onVolumeDown: () {
+  //       _handleVolumeButtonPress();
+  //     },
+  //   );
+  // }
 
 
   Future<void> _loadData() async {
@@ -249,9 +249,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class _volumeKeyBoard {
-}
+// class _volumeKeyBoard {
+// }
 
 
-class _handleVolumeButtonPress {
-}
+// class _handleVolumeButtonPress {
+// }

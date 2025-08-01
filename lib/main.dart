@@ -1,6 +1,10 @@
 // 📄 lib/main.dart
 import 'package:flutter/material.dart';
+import 'package:tears/screens/messages_screen.dart';
+import 'package:tears/screens/pet_name_screen.dart';
+import 'package:tears/screens/post_screen.dart';
 import 'screens/home_screen.dart';
+import 'screens/post_screen.dart';
 
 void main() {
   runApp(const TearsApp());
@@ -31,7 +35,9 @@ class TearsApp extends StatelessWidget {
           surface: Colors.white,
         ),
       ),
-      home: const HomeScreen(),
+      // home: const HomeScreen(),
+      // home: const MessagesScreen(),
+        home: PostScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

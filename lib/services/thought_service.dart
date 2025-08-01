@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ThoughtService {
-  static const String baseUrl = 'http://localhost:8000'; // Adjust as needed
+  static const String baseUrl = 'postgresql://hbhuser:hbhpassword@localhost:5432/hbhdb'; // Adjust as needed
 
   // Log a thought
   static Future<bool> logThought(int userId) async {

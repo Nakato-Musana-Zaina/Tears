@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import '../models/message_model.dart';
 
 class MessageService {
-  static const String baseUrl = 'http://localhost:8000'; // change accordingly
+  static const String baseUrl = 'postgresql://hbhuser:hbhpassword@localhost:5432/hbhdb'; // change accordingly
   static const int userId = 1; // mock user ID
 
   static Future<List<MessageModel>> getAllMessages() async {
