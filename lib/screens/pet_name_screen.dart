@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/custom_fab.dart';
 import 'home_screen.dart';
-import 'anger_page.dart';
+import 'help_screen.dart';
 
 class FirstPage extends StatelessWidget {
   final dynamic toggleTheme;

@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'screens/pet_name_screen.dart';
 import 'screens/messages_screen.dart';
 import 'screens/home_screen.dart';
+import 'screens/help_screen.dart';
 
 void main() {
   runApp(const TearsApp());
@@ -46,11 +47,13 @@ class _TearsAppState extends State<TearsApp> {
       title: 'Tears',
       debugShowCheckedModeBanner: false,
       theme: _isDarkMode ? darkTheme : lightTheme,
-      initialRoute: '/messages',
+      initialRoute: '/help',
       routes: {
         '/petname': (context) => FirstPage(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
         '/home': (context) => HomeScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
         '/messages': (context) => MessagesScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
+        '/help': (context) => HelpScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
+
       },
     );
   }
