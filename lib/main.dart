@@ -1,12 +1,38 @@
 // lib/main.dart
+
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 import 'package:shared_preferences/shared_preferences.dart';
+
+// Import your screens
 import 'screens/pet_name_screen.dart';
 import 'screens/messages_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/help_screen.dart';
+import 'screens/healer_screens/healers_screen.dart';
+import 'screens/healer_screens/traditional_healers_screen.dart';
+import 'screens/healer_screens/spiritual_healers_screen.dart';
+import 'screens/healer_screens/bee_chat_screen.dart';
 
-void main() {
+// ✅ Global variable to store API key
+late String? openAiApiKey;
+
+// ✅ 1. Change to Future<void> and add async
+Future<void> main() async {
+  // ✅ Required before any async operations
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // ✅ 2. Load the .env file
+  await dotenv.dotenv.load(fileName: '.env');
+
+  // ✅ 3. Read the API key
+  openAiApiKey = dotenv.dotenv.env['OPENAI_API_KEY'];
+
+  if (openAiApiKey == null) {
+    print('⚠️ Warning: OPENAI_API_KEY not found in .env file');
+  }
+
+  // ✅ 4. Run the app
   runApp(const TearsApp());
 }
 
@@ -47,13 +73,16 @@ class _TearsAppState extends State<TearsApp> {
       title: 'Tears',
       debugShowCheckedModeBanner: false,
       theme: _isDarkMode ? darkTheme : lightTheme,
-      initialRoute: '/help',
+      initialRoute: '/bee',
       routes: {
         '/petname': (context) => FirstPage(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
         '/home': (context) => HomeScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
         '/messages': (context) => MessagesScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
         '/help': (context) => HelpScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
-
+        '/healers': (context) => HealersScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
+        '/spiritualhealers': (context) => SpiritualHealersScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
+        '/traditionalhealers': (context) => TraditionalHealersScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
+        '/bee': (context) => BeeChatScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
       },
     );
   }
