@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tears/screens/location_screen.dart';
 
 // Import your screens
 import 'screens/pet_name_screen.dart';
@@ -22,17 +23,17 @@ Future<void> main() async {
   // ✅ Required before any async operations
   WidgetsFlutterBinding.ensureInitialized();
 
-  // ✅ 2. Load the .env file
-  await dotenv.dotenv.load(fileName: '.env');
+  // ✅ Load .env from assets (required for Web)
+  await dotenv.dotenv.load(fileName: "assets/.env");
 
-  // ✅ 3. Read the API key
+  // ✅ Read the API key
   openAiApiKey = dotenv.dotenv.env['OPENAI_API_KEY'];
 
   if (openAiApiKey == null) {
-    print('⚠️ Warning: OPENAI_API_KEY not found in .env file');
+    print('⚠️ Warning: OPENAI_API_KEY not found in assets/.env');
   }
 
-  // ✅ 4. Run the app
+  // ✅ Run the app
   runApp(const TearsApp());
 }
 
@@ -73,7 +74,7 @@ class _TearsAppState extends State<TearsApp> {
       title: 'Tears',
       debugShowCheckedModeBanner: false,
       theme: _isDarkMode ? darkTheme : lightTheme,
-      initialRoute: '/bee',
+      initialRoute: '/location',
       routes: {
         '/petname': (context) => FirstPage(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
         '/home': (context) => HomeScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
@@ -83,6 +84,8 @@ class _TearsAppState extends State<TearsApp> {
         '/spiritualhealers': (context) => SpiritualHealersScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
         '/traditionalhealers': (context) => TraditionalHealersScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
         '/bee': (context) => BeeChatScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
+        '/location': (context) => LocationScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
+
       },
     );
   }

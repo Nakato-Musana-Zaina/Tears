@@ -48,6 +48,7 @@ dependencies:
   speech_to_text: ^6.3.0     # For voice input
   path_provider: ^2.1.1      # For saving journal
   share_plus: ^7.2.0         # To share journal
+  url_launcher: ^6.3.2
 
 dev_dependencies:
   flutter_test:
@@ -72,6 +73,8 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
+    - assets/.env
+    
   
 
   # To add assets to your application, add an assets section, like this:
