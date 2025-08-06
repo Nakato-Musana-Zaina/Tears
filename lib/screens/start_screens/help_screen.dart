@@ -1,8 +1,8 @@
 // lib/screens/help_screen.dart
 
 import 'package:flutter/material.dart';
-import '../widgets/custom_fab.dart';
-import 'messages_screen.dart';
+import '../../widgets/custom_fab.dart';
+import '../messages_screen.dart';
 
 class HelpScreen extends StatefulWidget {
   final VoidCallback toggleTheme;

@@ -3,17 +3,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tears/screens/location_screen.dart';
+import 'package:tears/screens/home_screen/home_screen.dart';
+import 'package:tears/screens/start_screens/main_screen.dart';
 
-// Import your screens
-import 'screens/pet_name_screen.dart';
+// Import Screens
+import 'screens/start_screens/pet_name_screen.dart';
 import 'screens/messages_screen.dart';
-import 'screens/home_screen.dart';
-import 'screens/help_screen.dart';
+import 'screens/start_screens/help_screen.dart';
 import 'screens/healer_screens/healers_screen.dart';
 import 'screens/healer_screens/traditional_healers_screen.dart';
 import 'screens/healer_screens/spiritual_healers_screen.dart';
 import 'screens/healer_screens/bee_chat_screen.dart';
+import 'screens/location_screen.dart';
+import 'screens/post_screens/post_list_screen.dart';
+import 'screens/post_screens/post_create_screen.dart';
 
 // ✅ Global variable to store API key
 late String? openAiApiKey;
@@ -23,7 +26,7 @@ Future<void> main() async {
   // ✅ Required before any async operations
   WidgetsFlutterBinding.ensureInitialized();
 
-  // ✅ Load .env from assets (required for Web)
+  // ✅ Load .env from assets
   await dotenv.dotenv.load(fileName: "assets/.env");
 
   // ✅ Read the API key
@@ -74,18 +77,25 @@ class _TearsAppState extends State<TearsApp> {
       title: 'Tears',
       debugShowCheckedModeBanner: false,
       theme: _isDarkMode ? darkTheme : lightTheme,
-      initialRoute: '/location',
+      initialRoute: '/home', // 👉 Now starts with MainScreen
       routes: {
-        '/petname': (context) => FirstPage(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
+        // ✅ Start Flow (if needed separately)
+        '/petname': (context) => PetNameScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
         '/home': (context) => HomeScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
-        '/messages': (context) => MessagesScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
         '/help': (context) => HelpScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
+
+        // ✅ Main App with Bottom Nav
+        '/main': (context) => MainScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
+
+        // ✅ Feature Screens
+        '/messages': (context) => MessagesScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
         '/healers': (context) => HealersScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
-        '/spiritualhealers': (context) => SpiritualHealersScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
         '/traditionalhealers': (context) => TraditionalHealersScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
+        '/spiritualhealers': (context) => SpiritualHealersScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
         '/bee': (context) => BeeChatScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
         '/location': (context) => LocationScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
-
+        '/posts': (context) => PostListScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
+        '/create_post': (context) => CreatePostScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode), // Fixed name
       },
     );
   }

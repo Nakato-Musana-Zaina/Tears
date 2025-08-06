@@ -1,16 +1,16 @@
 // lib/screens/first_page.dart
 
 import 'package:flutter/material.dart';
-import '../widgets/custom_fab.dart';
-import 'home_screen.dart';
+import '../../widgets/custom_fab.dart';
+// import 'main_screen.dart';
 import 'help_screen.dart';
 
-class FirstPage extends StatelessWidget {
+class PetNameScreen extends StatelessWidget {
   final dynamic toggleTheme;
   
   final dynamic isDarkMode;
 
-  const FirstPage({Key? key,required this.toggleTheme, required this.isDarkMode}) : super(key: key);
+  const PetNameScreen({Key? key,required this.toggleTheme, required this.isDarkMode}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
