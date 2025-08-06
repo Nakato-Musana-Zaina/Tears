@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:tears/screens/healer_screens/healers_screen.dart';
 import 'package:tears/screens/home_screen/home_screen.dart';
-import 'package:tears/screens/location_screen.dart';
-import 'package:tears/screens/messages_screen.dart';
+import 'package:tears/screens/location_screen/location_screen.dart';
+import 'package:tears/screens/message_screen/messages_screen.dart';
 import 'package:tears/screens/post_screens/post_list_screen.dart';
 import 'package:tears/widgets/custom_bottom_navbar.dart';
 

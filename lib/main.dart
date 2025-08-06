@@ -3,18 +3,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tears/screens/full_screen.dart';
 import 'package:tears/screens/home_screen/home_screen.dart';
 import 'package:tears/screens/start_screens/main_screen.dart';
 
 // Import Screens
 import 'screens/start_screens/pet_name_screen.dart';
-import 'screens/messages_screen.dart';
+import 'screens/message_screen/messages_screen.dart';
 import 'screens/start_screens/help_screen.dart';
 import 'screens/healer_screens/healers_screen.dart';
 import 'screens/healer_screens/traditional_healers_screen.dart';
 import 'screens/healer_screens/spiritual_healers_screen.dart';
 import 'screens/healer_screens/bee_chat_screen.dart';
-import 'screens/location_screen.dart';
+import 'screens/location_screen/location_screen.dart';
 import 'screens/post_screens/post_list_screen.dart';
 import 'screens/post_screens/post_create_screen.dart';
 
@@ -77,12 +78,14 @@ class _TearsAppState extends State<TearsApp> {
       title: 'Tears',
       debugShowCheckedModeBanner: false,
       theme: _isDarkMode ? darkTheme : lightTheme,
-      initialRoute: '/home', // 👉 Now starts with MainScreen
+      initialRoute: '/try', // 👉 Now starts with MainScreen
       routes: {
         // ✅ Start Flow (if needed separately)
         '/petname': (context) => PetNameScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
         '/home': (context) => HomeScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
         '/help': (context) => HelpScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),
+        '/try': (context) => FullMessagesScreen(),
+
 
         // ✅ Main App with Bottom Nav
         '/main': (context) => MainScreen(toggleTheme: toggleTheme, isDarkMode: _isDarkMode),

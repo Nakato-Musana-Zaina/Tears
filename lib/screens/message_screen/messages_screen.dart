@@ -4,9 +4,9 @@ import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // import 'package:flutter_slidable/flutter_slidable.dart';
-import '../models/message_model.dart';
-import '../services/message_service.dart';
-import '../widgets/custom_fab.dart';
+import '../../models/message_model.dart';
+import '../../services/message_service.dart';
+import '../../widgets/custom_fab.dart';
 
 class MessagesScreen extends StatefulWidget {
   final VoidCallback toggleTheme;

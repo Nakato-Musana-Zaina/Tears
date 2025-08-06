@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:tears/widgets/custom_text_feild.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../services/location_service.dart';
-import '../widgets/custom_fab.dart';
+import '../../services/location_service.dart';
+import '../../widgets/custom_fab.dart';
 
 class LocationScreen extends StatefulWidget {
   final VoidCallback toggleTheme;
